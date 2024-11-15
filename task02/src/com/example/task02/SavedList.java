@@ -15,7 +15,9 @@ public class SavedList<E extends Serializable> extends AbstractList<E> {
         if (file.exists()) {
             try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
                 list = (ArrayList<E>) is.readObject();
-            } catch (Exception ignored) { }
+            } catch (Exception e) {
+                System.err.println("Ошибка при чтении данных из файла: " + file.getAbsolutePath());
+                e.printStackTrace();}
         } else {
             list = new ArrayList<>();
         }
